@@ -1,6 +1,7 @@
 const Lang = require('./lang/Lang')
 
 const LogManager = require('./manager/LogManager')
+const ServerManager = require('./manager/ServerManager')
 const { LEVEL } = require('./log/Logger')
 
 class Application {
@@ -16,6 +17,7 @@ class Application {
   }
 
   init () {
+    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'))
   }
 
   get name () {

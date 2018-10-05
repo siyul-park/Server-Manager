@@ -1,35 +1,47 @@
-const Lang = require('./lang/Lang')
+const Lang = require('../lang/Lang')
 const Manager = require('./Manager.js')
-const LogManager = require('./LogManager')
 
-const Clock = require('../log/Clock')
 const { LEVEL } = require('../log/Logger')
 
 const express = require('express')
-const app = express()
-const http = require('http').Server(app)
+const http = require('http')
 const io = require('socket.io')
 const path = require('path')
 
 class ServerManager extends Manager {
-  async init () {
+  init () {
     this._userList = []
     this._logger = this._app.logManager.getLogger(LEVEL.ALL)
+    let startTime = new Date().getTime()
 
-    let startTime = new Clock()
-    this._socketServer = io.listen(http)
+    this._logger.info(Lang.format('msg.manager.server.version', [ServerManager.version]))
 
-    this._logger.info(Lang.format('msg.manager.server.version', [ServerManager.version])
+    this._logger.info(Lang.format('msg.server.opening'))
+
+    const app = express()
+    app.use(express.static(path.join(__dirname, 'public')))
+
+    this._httpServer = http.Server(app)
+    this._logger.fine(Lang.format('msg.httpserver.created'))
+    this._socketServer = io.listen(this._httpServer)
+    this._logger.fine(Lang.format('msg.socketioserver.created'))
 
     process.on('uncaughtException', (err) => {
       this._logger.warning(err.stack)
     })
+
+    let logger = this._logger
+    this._httpServer.listen(8080, function (req, res) {
+      let endTime = new Date().getTime()
+
+      logger.fine(Lang.format('msg.server.opened', [(endTime - startTime) / 1000]))
+    })
   }
 }
 
-
+/*
 class ServerManager extends Manager {
-  async init () {
+  async init() {
     this._userList = []
     this._logger = this._app.logManager.getLogger(LEVEL.ALL)
 
@@ -37,7 +49,7 @@ class ServerManager extends Manager {
     this.socketServer = io.listen(http)
 
     this._logger.info('Server Manager version: ' + ServerManager.version)
-    
+
     process.on('uncaughtException', (err) => {
       this._logger.warning(err.stack)
     })
@@ -56,7 +68,7 @@ class ServerManager extends Manager {
     })
   }
 
-  getPlayer (name) {
+  getPlayer(name) {
     for (let i in this.playerList) {
       if (this.playerList[i].getName() === name) {
         return this.playerList[i]
@@ -66,7 +78,7 @@ class ServerManager extends Manager {
     return null
   }
 
-  addPlayer (player) {
+  addPlayer(player) {
     for (let i in this.playerList) {
       if (this.playerList[i].getId() === player.getId()) {
         return
@@ -75,7 +87,7 @@ class ServerManager extends Manager {
     this.playerList.push(player)
   }
 
-  removePlayer (player) {
+  removePlayer(player) {
     for (let i in this.playerList) {
       if (this.playerList[i].getId() === player.getId()) {
         this.playerList.splice(i, 1)
@@ -84,7 +96,7 @@ class ServerManager extends Manager {
     }
   }
 
-  getPlayerById (id) {
+  getPlayerById(id) {
     for (let i in this.playerList) {
       if (this.playerList[i].getId() === id) {
         return this.playerList[i]
@@ -94,44 +106,44 @@ class ServerManager extends Manager {
     return null
   }
 
-  getPlayers () {
+  getPlayers() {
     return this.playerList.slice()
   }
 
-  getSocketServer () {
+  getSocketServer() {
     return this.socketServer
   }
 
-  getLoginManager () {
+  getLoginManager() {
     return socketConnectManager.loginManager
   }
 
-  getDisconnectManager () {
+  getDisconnectManager() {
     return socketConnectManager.disconnectManager
   }
 
-  getChatManager () {
+  getChatManager() {
     return socketConnectManager.chatManager
   }
 
-  getCommandManager () {
+  getCommandManager() {
     return socketConnectManager.commandManager
   }
 
-  getSocketConnectManager () {
+  getSocketConnectManager() {
     return socketConnectManager
   }
 
-  getName () {
+  getName() {
     return 'server'
   }
 
-  static get version () {
+  static get version() {
     return '0.0.1'
   }
 
   // Grade
-  static get GRADE () {
+  static get GRADE() {
     return {
       GUEST: 'guest',
       OPERATOR: 'operator',
@@ -139,5 +151,5 @@ class ServerManager extends Manager {
     }
   }
 }
-
+*/
 module.exports = ServerManager

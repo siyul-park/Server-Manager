@@ -41,6 +41,7 @@ class LogManager {
       .addFileHandel(fileFineHandel)
       .addLogger(logger)
 
+    logger.fine(Lang.format('msg.created', [this._name]))
     logger.fine(Lang.format('msg.created', [logger.name]))
   }
 

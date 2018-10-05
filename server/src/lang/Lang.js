@@ -3,6 +3,7 @@ let languageData = {
     name_application: '어플리케이션',
     name_logger: '로거',
     name_manager_log: '로그 관리자',
+    name_manager_server: '서버 관리자',
     name_logger_default: '기본 로거',
 
     msg_creating: '%s을(를) 생성하고 있습니다.',
@@ -18,6 +19,11 @@ let languageData = {
     msg_application_destroyed: '%s이(가) 종료되었습니다.',
 
     msg_manager_server_version: '서버관리자의 버전은 %s입니다.',
+
+    msg_server_opening: '서버를 여는 중입니다...',
+    msg_httpserver_created: 'http 서버가 만들어 졌습니다.',
+    msg_socketioserver_created: 'Socket.io 서버가 만들어 졌습니다.',
+    msg_server_opened: '(%s초) 서버가 열였습니다. 도움말을 보시려면 "help"를 입력해 주세요',
 
     form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s\n> ',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ 정보 ] %s\x1b[0m\n> ',
@@ -39,6 +45,7 @@ let languageData = {
     name_application: 'Application',
     name_logger: 'Logger',
     name_manager_log: 'Log Manager',
+    name_manager_server: 'Server Manager',
     name_logger_default: 'Default Logger',
 
     msg_creating: 'Creating %s.',
@@ -54,6 +61,11 @@ let languageData = {
     msg_application_destroyed: 'Destroyed %s.',
 
     msg_manager_server_version: 'Server Manager version: %s',
+
+    msg_server_opening: 'Opening Server...',
+    msg_httpserver_created: 'Created http Server.',
+    msg_socketioserver_created: 'Created Socket.io Server.',
+    msg_server_opened: 'Openied Server(%s). For help, type "help"',
 
     form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s\n> ',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ INFO ] %s\x1b[0m\n> ',

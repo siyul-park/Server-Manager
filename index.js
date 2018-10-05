@@ -2,11 +2,11 @@ const Application = require('./server/src/Application.js')
 const Lang = require('./server/src/lang/Lang')
 
 function testing () {
-  Lang.setLanguage('ko')
+  Lang.setLanguage('en')
 
   let app = new Application()
 
-  app.destroyer()
+  //app.destroyer()
 }
 
 testing()

@@ -5,7 +5,7 @@ const ChatManager = require('./ChatManager.js')
 const CommandManager = require('./CommandManager.js')
 
 class SocketConnectManager extends Manager {
-  init() {
+  init () {
     this.loginManager = new LoginManager()
     this.disconnectManager = new DisconnectManager()
     this.chatManager = new ChatManager()
