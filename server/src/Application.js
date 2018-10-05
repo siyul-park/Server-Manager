@@ -35,6 +35,8 @@ class Application {
     this.destroy()
     this._logManager.destroyer()
     this._logger.fine(Lang.format('msg.application.destroyed', [this._name]))
+
+    process.exit()
   }
 
   destroy () {

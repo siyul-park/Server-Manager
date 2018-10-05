@@ -1,5 +1,6 @@
 const Lang = require('../lang/Lang')
-const Manager = require('./Manager.js')
+const Manager = require('./Manager')
+const SocketConnectManager = require('./SocketConnectManager')
 
 const { LEVEL } = require('../log/Logger')
 
@@ -9,9 +10,10 @@ const io = require('socket.io')
 const path = require('path')
 
 class ServerManager extends Manager {
-  init () {
+  init (args = {}) {
     this._userList = []
     this._logger = this._app.logManager.getLogger(LEVEL.ALL)
+
     let startTime = new Date().getTime()
 
     this._logger.info(Lang.format('msg.manager.server.version', [ServerManager.version]))
@@ -26,9 +28,9 @@ class ServerManager extends Manager {
     this._socketServer = io.listen(this._httpServer)
     this._logger.fine(Lang.format('msg.socketioserver.created'))
 
-    process.on('uncaughtException', (err) => {
-      this._logger.warning(err.stack)
-    })
+    this._socketConnectManager = new SocketConnectManager(this._app,
+      Lang.format('name.manager.socketConnect'),
+      { socketServer: this._socketServer })
 
     let logger = this._logger
     this._httpServer.listen(8080, function (req, res) {
@@ -36,6 +38,85 @@ class ServerManager extends Manager {
 
       logger.fine(Lang.format('msg.server.opened', [(endTime - startTime) / 1000]))
     })
+  }
+
+  getUser (name) {
+    for (let i in this._userList) {
+      if (this._userList[i].getName() === name) {
+        return this._userList[i]
+      }
+    }
+
+    return null
+  }
+
+  addUser (user) {
+    for (let i in this._userList) {
+      if (this._userList[i].getId() === user.getId()) {
+        return
+      }
+    }
+    this._userList.push(user)
+  }
+
+  removeUser (user) {
+    for (let i in this._userList) {
+      if (this._userList[i].getId() === user.getId()) {
+        this._userList.splice(i, 1)
+        return
+      }
+    }
+  }
+
+  getUserById (id) {
+    for (let i in this._userList) {
+      if (this._userList[i].getId() === id) {
+        return this._userList[i]
+      }
+    }
+
+    return null
+  }
+
+  getUsers () {
+    return this._userList.slice()
+  }
+
+  get socketServer () {
+    return this._socketServer
+  }
+
+  get loginManager () {
+    return this._socketConnectManager.loginManager
+  }
+
+  get disconnectManager () {
+    return this._socketConnectManager.disconnectManager
+  }
+
+  get chatManager () {
+    return this._socketConnectManager.chatManager
+  }
+
+  get commandManager () {
+    return this._socketConnectManager.commandManager
+  }
+
+  get socketConnectManager () {
+    return this._socketConnectManager
+  }
+
+  // Grade
+  static get GRADE () {
+    return {
+      GUEST: 'guest',
+      OPERATOR: 'operator',
+      ADMINISTRATOR: 'admin'
+    }
+  }
+
+  static get version () {
+    return '0.0.1'
   }
 }
 

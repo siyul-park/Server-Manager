@@ -1,41 +1,46 @@
 const Manager = require('./Manager.js')
+/*
 const LoginManager = require('./LoginManager.js')
 const DisconnectManager = require('./DisconnectManager.js')
 const ChatManager = require('./ChatManager.js')
 const CommandManager = require('./CommandManager.js')
+*/
 
 class SocketConnectManager extends Manager {
-  init () {
-    this.loginManager = new LoginManager()
-    this.disconnectManager = new DisconnectManager()
-    this.chatManager = new ChatManager()
-    this.commandManager = new CommandManager()
-    this.commandManager.init()
+  init (args = {}) {
+    this._socketServer = args.socketServer
+
+    /*
+    this._loginManager = new LoginManager()
+    this._disconnectManager = new DisconnectManager()
+    this._chatManager = new ChatManager()
+    this._commandManager = new CommandManager()
 
     const socketConnectManager = this
 
-    Vokkit.getServer().getSocketServer().on('connection', function (socket) {
-      socketConnectManager.loginManager.addListener(socket)
-      socketConnectManager.disconnectManager.addListener(socket)
-      socketConnectManager.chatManager.addListener(socket)
-      socketConnectManager.commandManager.addListener(socket)
+    this._socketServer.on('connection', function (socket) {
+      socketConnectManager._loginManager.addListener(socket)
+      socketConnectManager._disconnectManager.addListener(socket)
+      socketConnectManager._chatManager.addListener(socket)
+      socketConnectManager._commandManager.addListener(socket)
     })
+    */
   }
 
-  getLoginManager() {
-    return this.loginManager
+  get loginManager () {
+    return this._loginManager
   }
 
-  getDisconnectManager() {
-    return this.disconnectManager
+  get disconnectManager () {
+    return this._disconnectManager
   }
 
-  getChatManager() {
-    return this.chatManager
+  get chatManager () {
+    return this._chatManager
   }
 
-  getCommandManager() {
-    return this.commandManager
+  get commandManager () {
+    return this._commandManager
   }
 }
 

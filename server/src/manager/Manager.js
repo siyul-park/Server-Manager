@@ -2,17 +2,17 @@ const Lang = require('../lang/Lang')
 const { LEVEL } = require('../log/Logger')
 
 class Manager {
-  constructor (app, name) {
+  constructor (app, name, args = {}) {
     this._app = app
     this._name = name
     this._logger = this._app.logManager.getLogger(LEVEL.ALL)
 
     this._logger.info(Lang.format('msg.creating', [this._name]))
-    this.init()
+    this.init(args)
     this._logger.fine(Lang.format('msg.created', [this._name]))
   }
 
-  init () { }
+  init (args = {}) { }
 
   destroyer () {
     this._logger.info(Lang.format('msg.destroying', [this._name]))
@@ -21,6 +21,14 @@ class Manager {
   }
 
   destroy () { }
+
+  get name () {
+    return this._name
+  }
+
+  get logger () {
+    return this._logger
+  }
 }
 
 module.exports = Manager

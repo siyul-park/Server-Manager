@@ -6,7 +6,7 @@ function testing () {
 
   let app = new Application()
 
-  //app.destroyer()
+  app.destroyer()
 }
 
 testing()

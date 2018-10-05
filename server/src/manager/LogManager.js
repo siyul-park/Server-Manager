@@ -43,6 +43,10 @@ class LogManager {
 
     logger.fine(Lang.format('msg.created', [this._name]))
     logger.fine(Lang.format('msg.created', [logger.name]))
+
+    process.on('uncaughtException', (err) => {
+      logger.warning(err.stack)
+    })
   }
 
   addLogger (logger) {
