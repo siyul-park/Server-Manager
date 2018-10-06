@@ -307,3 +307,5 @@ var o = $('#camera');
     }
 })
 (jQuery);
+
+var socket = io()
