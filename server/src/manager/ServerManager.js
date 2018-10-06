@@ -17,6 +17,13 @@ class ServerManager extends Manager {
 
     this._logger.info(Lang.format('msg.server.opening'))
 
+    const interfaces = require('os').networkInterfaces()
+
+    const addresses = Object.keys(interfaces)
+      .reduce((results, name) => results.concat(interfaces[name]), [])
+      .filter((iface) => iface.family === 'IPv4' && !iface.internal)
+      .map((iface) => iface.address)
+
     const app = express()
     app.use(express.static(path.join(path.resolve(''), 'public')))
 
@@ -30,7 +37,7 @@ class ServerManager extends Manager {
     this._httpServer.listen(portNumber, function (req, res) {
       let endTime = new Date().getTime()
 
-      logger.fine(Lang.format('msg.server.opened', [portNumber, (endTime - startTime) / 1000]))
+      logger.fine(Lang.format('msg.server.opened', [addresses + ':' + portNumber, (endTime - startTime) / 1000]))
     })
   }
 

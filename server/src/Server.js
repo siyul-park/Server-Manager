@@ -9,7 +9,7 @@ const SocketConnectManager = require('./manager/SocketConnectManager')
 
 const { LEVEL } = require('./log/Logger')
 
-class Application {
+class Server {
   constructor (name) {
     this._name = name || Lang.format('name.application')
 
@@ -79,4 +79,4 @@ class Application {
   }
 }
 
-module.exports = Application
+module.exports = Server

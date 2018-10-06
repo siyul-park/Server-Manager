@@ -1,10 +1,3 @@
-const Application = require('./server/src/Application.js')
-const Lang = require('./server/src/lang/Lang')
+const Vokkit = require('./server/src/Vokkit')
 
-function testing () {
-  Lang.setLanguage('ko')
-
-  let app = new Application()
-}
-
-testing()
+Vokkit.init()

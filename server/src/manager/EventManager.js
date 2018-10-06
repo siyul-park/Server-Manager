@@ -4,6 +4,7 @@ const EventPriority = require('../event/EventPriority.js')
 const UserLoginEventExecuter = require('../event/user/UserLoginEventExecuter')
 const UserJoinEventExecuter = require('../event/user/UserJoinEventExecuter')
 const SocketConnectionEventExecuter = require('../event/socket/SocketConnectionEventExecuter')
+const SocketDisconnectionEventExecuter = require('../event/socket/SocketDisconnectionEventExecuter')
 
 class EventManager extends Manager {
   init (args) {
@@ -12,6 +13,7 @@ class EventManager extends Manager {
     this.registerEvent(new UserLoginEventExecuter(this._app))
     this.registerEvent(new UserJoinEventExecuter(this._app))
     this.registerEvent(new SocketConnectionEventExecuter(this._app))
+    this.registerEvent(new SocketDisconnectionEventExecuter(this._app))
   }
 
   registerEvent (eventExecuter) {

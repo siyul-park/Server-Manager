@@ -1,11 +1,11 @@
 const SocketConnectionEvent = require('../event/socket/SocketConnectionEvent')
-const Listenr = require('./Listner')
+const Listener = require('./Listener')
 
-class ConnectListner extends Listenr {
+class ConnectListener extends Listener {
   addListener (socket) {
     let socketConnectionEvent = new SocketConnectionEvent(socket)
     this._app.eventManager.extuteEvent(socketConnectionEvent)
   }
 }
 
-module.exports = ConnectListner
+module.exports = ConnectListener

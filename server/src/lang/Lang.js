@@ -28,7 +28,7 @@ let languageData = {
     msg_server_opening: '서버를 여는 중입니다...',
     msg_httpserver_created: 'http 서버가 만들어졌습니다.',
     msg_socketioserver_created: 'Socket.io 서버가 만들어졌습니다.',
-    msg_server_opened: '%s 포트로 서버가 열였습니다. 도움말을 보시려면 "help"를 입력해 주세요. (%s초)',
+    msg_server_opened: '%s로 서버가 열였습니다. 도움말을 보시려면 "help"를 입력해 주세요. (%s초)',
 
     msg_plugin_loading: '%s 플러그인(버전: %s)이 로드되고 있습니다...',
     msg_plugin_load_succeed: '플러그인이 성공적으로 로드되었습니다.',
@@ -42,10 +42,11 @@ let languageData = {
     msg_client_build_fail: '클라이언트 빌드가 실패했습니다.',
     msg_client_build_succeed: '클라이언트 빌드가 성공했습니다.',
 
-    msg_user_login: '%s [%s:%s] 이(가) 로그인 했습니다.',
-    msg_user_connect: '[%s:%s] 이(가) 서버에 접촉했습니다.',
+    msg_user_login: '%s [%s:%s]이(가) 로그인 했습니다.',
+    msg_user_connect: '[%s:%s]이(가) 서버에 접촉했습니다.',
+    msg_user_disconnect: '[%s:%s]이(가) 서버에서 나갔습니다.',
 
-    err_login_emptyId: '공백 ID를 사용할 수 없습니다.',
+    err_login_emptyId: '빈 ID를 사용할 수 없습니다.',
     err_login_longId: 'ID는 %s자를 넘을 수 없습니다.',
     err_login_sameId: 'ID가 중복됩니다.',
 
@@ -99,24 +100,25 @@ let languageData = {
     msg_server_opening: 'Opening Server...',
     msg_httpserver_created: 'Created http Server.',
     msg_socketioserver_created: 'Created Socket.io Server.',
-    msg_server_opened: 'Opened Server. Port is %s, For help, type "help". (%s)',
+    msg_server_opened: 'Opened Server(%s), For help, type "help". (%s)',
 
     msg_plugin_loading: 'Loading %s Plugin(version: %s)...',
     msg_plugin_load_succeed: 'Succeed Loading Plugin.',
     msg_plugin_load_fail: 'Fail Loading Plugin.',
-    msg_plugin_compile_first: 'Please Complie Plugin First. ',
-    msg_plugin_enabling: 'Enabling %s(version: %s)',
-    msg_plugin_enable_fail: 'Fail to enable %s(version: %s)',
-    msg_plugin_enable_succeed: 'Succed to enable %s(version: %s)',
+    msg_plugin_compile_first: 'Please Complie Plugin First.',
+    msg_plugin_enabling: 'Enabling %s(version: %s).',
+    msg_plugin_enable_fail: 'Fail to enable %s(version: %s).',
+    msg_plugin_enable_succeed: 'Succed to enable %s(version: %s).',
 
     msg_client_building: 'Building Client...',
-    msg_client_build_fail: 'Fail to client build',
-    msg_client_build_succeed: 'Succed to client build',
+    msg_client_build_fail: 'Fail to client build.',
+    msg_client_build_succeed: 'Succed to client build.',
 
-    msg_user_login: '%s [%s:%s] Login',
-    msg_user_connect: '[%s:%s] Connect',
+    msg_user_login: '%s [%s:%s] Login.',
+    msg_user_connect: '[%s:%s] Connect.',
+    msg_user_disconnect: '[%s:%s] Disconnect.',
 
-    err_login_emptyId: 'Cannot use empty ID',
+    err_login_emptyId: 'Cannot use empty ID.',
     err_login_longId: 'ID cannot exceed %s characters.',
     err_login_sameId: 'same ID exists!',
 

@@ -1,12 +1,13 @@
 const User = require('../entity/User')
 
+const Listener = require('./Listener')
+
 const UserLoginEvent = require('../event/user/UserLoginEvent')
 const UserJoinEvent = require('../event/user/UserJoinEvent')
-const Listenr = require('./Listner')
 
 const Lang = require('../lang/Lang')
 
-class LoginListner extends Listenr {
+class LoginListener extends Listener {
   addListener (socket) {
     let app = this._app
 
@@ -31,4 +32,4 @@ class LoginListner extends Listenr {
   }
 }
 
-module.exports = LoginListner
+module.exports = LoginListener

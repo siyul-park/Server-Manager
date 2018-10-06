@@ -1,6 +1,7 @@
 const Manager = require('./Manager.js')
-const LoginListenr = require('../Listener/LoginListenr')
-const ConnectListenr = require('../Listener/ConnectListenr')
+const LoginListener = require('../listener/LoginListener')
+const ConnectListener = require('../listener/ConnectListener')
+const DisconnectListener = require('../listener/DisconnectListener')
 /*
 const LoginManager = require('./LoginManager.js')
 const DisconnectManager = require('./DisconnectManager.js')
@@ -13,11 +14,13 @@ class SocketConnectManager extends Manager {
     this._socketServer = args.socketServer
     this._listener = []
 
-    this._loginListenr = new LoginListenr(this._app)
-    this._connectListenr = new ConnectListenr(this._app)
+    this._loginListenr = new LoginListener(this._app)
+    this._connectListenr = new ConnectListener(this._app)
+    this._disconnectListener = new DisconnectListener(this._app)
 
     this.addListener(this._loginListenr)
     this.addListener(this._connectListenr)
+    this.addListener(this._disconnectListener)
 
     this.linkListener()
   }
