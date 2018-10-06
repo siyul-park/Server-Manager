@@ -84,7 +84,7 @@ class Application {
     this._consoleManager.destroyer()
     this._pluginManager.destroyer()
     this._eventManager.destroyer()
-    this._logManager.destroyer()
+    this._loginManager.destroyer()
     this._socketConnectManager.destroyer()
   }
 }
