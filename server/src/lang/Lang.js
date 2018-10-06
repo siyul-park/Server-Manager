@@ -8,7 +8,6 @@ let languageData = {
     name_manager_console: '콘솔 관리자',
     name_manager_plugin: '플러그인 관리자',
     name_manager_event: '이벤트 관리자',
-    name_manager_login: '로그인 관리자',
 
     name_logger_default: '기본 로거',
 
@@ -43,7 +42,8 @@ let languageData = {
     msg_client_build_fail: '클라이언트 빌드가 실패했습니다.',
     msg_client_build_succeed: '클라이언트 빌드가 성공했습니다.',
 
-    msg_player_login: '%s [%s:%s] 이(가) 로그인 했습니다.',
+    msg_user_login: '%s [%s:%s] 이(가) 로그인 했습니다.',
+    msg_user_connect: '[%s:%s] 이(가) 서버에 접촉했습니다.',
 
     err_login_emptyId: '공백 ID를 사용할 수 없습니다.',
     err_login_longId: 'ID는 %s자를 넘을 수 없습니다.',
@@ -79,7 +79,6 @@ let languageData = {
     name_manager_console: 'Console Manager',
     name_manager_plugin: 'Plugin Manager',
     name_manager_event: 'Event Manager',
-    name_manager_login: 'Login Manager',
 
     name_logger_default: 'Default Logger',
 
@@ -114,7 +113,8 @@ let languageData = {
     msg_client_build_fail: 'Fail to client build',
     msg_client_build_succeed: 'Succed to client build',
 
-    msg_player_login: '%s [%s:%s] Login',
+    msg_user_login: '%s [%s:%s] Login',
+    msg_user_connect: '[%s:%s] Connect',
 
     err_login_emptyId: 'Cannot use empty ID',
     err_login_longId: 'ID cannot exceed %s characters.',

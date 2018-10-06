@@ -34,7 +34,7 @@ class UserLoginEventExecuter extends EventExecuter {
 
     let serverManager = this._app.serverManager
     serverManager.addUser(user)
-    logger.info(Lang.format('msg.player.login', [user.name, event.address.address, event.address.port]))
+    logger.info(Lang.format('msg.user.login', [user.name, event.address.address, event.address.port]))
   }
 }
 

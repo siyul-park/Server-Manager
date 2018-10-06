@@ -2,15 +2,13 @@ const User = require('../entity/User')
 
 const UserLoginEvent = require('../event/user/UserLoginEvent')
 const UserJoinEvent = require('../event/user/UserJoinEvent')
-const ServerManager = require('../manager/ServerManager')
+const Listenr = require('./Listner')
 
-const SocketManager = require('./SocketManager.js')
 const Lang = require('../lang/Lang')
 
-class LoginManager extends SocketManager {
+class LoginListner extends Listenr {
   addListener (socket) {
     let app = this._app
-    let logger = this._logger
 
     socket.on('login', function (data) {
       let user = new User(socket.id, data.name, socket)
@@ -27,24 +25,10 @@ class LoginManager extends SocketManager {
         return
       }
 
-      let sendUsers = []
-      let userList = app.serverManager.getUsers()
-      for (let i in userList) {
-        sendUsers.push(userList[i].toObject())
-      }
-
-      sendUsers.push(user.toObject())
-      socket.emit('loginResult', {
-        succeed: true,
-        Users: sendUsers
-      })
-
       let userJoinEvent = new UserJoinEvent(user, Lang.format('form.user.login'))
       app.eventManager.extuteEvent(userJoinEvent)
-
-      logger.config(Lang.format('form.user.list', [ServerManager.version, app.serverManager.getUsers().length]))
     })
   }
 }
 
-module.exports = LoginManager
+module.exports = LoginListner

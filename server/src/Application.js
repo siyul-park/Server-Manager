@@ -6,7 +6,6 @@ const ConsoleManager = require('./manager/ConsoleManager')
 const PluginManager = require('./manager/PluginManager')
 const EventManager = require('./manager/EventManager')
 const SocketConnectManager = require('./manager/SocketConnectManager')
-const LoginManager = require('./manager/LoginManager')
 
 const { LEVEL } = require('./log/Logger')
 
@@ -38,11 +37,6 @@ class Application {
     this._socketConnectManager = new SocketConnectManager(this,
       Lang.format('name.manager.socketConnect'),
       { socketServer: this._serverManager.socketServer })
-
-    this._loginManager = new LoginManager(this, Lang.format('name.manager.login'))
-    this._socketConnectManager.addSocketManager(this._loginManager)
-
-    this._socketConnectManager.linkListener()
   }
 
   get name () {
@@ -56,9 +50,6 @@ class Application {
   }
   get socketConnectManager () {
     return this._socketConnectManager
-  }
-  get loginManager () {
-    return this._loginManager
   }
   get consoleManager () {
     return this._consoleManager
@@ -84,7 +75,6 @@ class Application {
     this._consoleManager.destroyer()
     this._pluginManager.destroyer()
     this._eventManager.destroyer()
-    this._loginManager.destroyer()
     this._socketConnectManager.destroyer()
   }
 }

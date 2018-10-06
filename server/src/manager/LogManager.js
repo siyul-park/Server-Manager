@@ -19,26 +19,17 @@ class LogManager {
 
     let consoleHandel = new ConsoleHandel()
     let fileALLHandel = new FileHandel('[ALL] ')
-    let fileInfoHandel = new FileHandel('[INFO] ')
     let fileWarnHandel = new FileHandel('[WARN] ')
-    let fileConfigHandel = new FileHandel('[CONFIG] ')
-    let fileFineHandel = new FileHandel('[FINE] ')
 
     logger.level = LEVEL.ALL
 
     consoleHandel.level = LEVEL.ALL
     fileALLHandel.level = LEVEL.ALL
-    fileInfoHandel.level = LEVEL.INFO
     fileWarnHandel.level = LEVEL.WARNING
-    fileConfigHandel.level = LEVEL.CONFIG
-    fileFineHandel.level = LEVEL.FINE | LEVEL.FINER | LEVEL.FINEST
 
     this.addConsoleHandel(consoleHandel)
       .addFileHandel(fileALLHandel)
-      .addFileHandel(fileInfoHandel)
       .addFileHandel(fileWarnHandel)
-      .addFileHandel(fileConfigHandel)
-      .addFileHandel(fileFineHandel)
       .addLogger(logger)
 
     logger.fine(Lang.format('msg.created', [this._name]))

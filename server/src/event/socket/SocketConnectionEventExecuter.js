@@ -1,4 +1,5 @@
 const EventExecuter = require('../EventExecuter')
+const Lang = require('../../lang/Lang')
 
 class SocketConnectionEventExecuter extends EventExecuter {
   constructor (app) {
@@ -7,7 +8,9 @@ class SocketConnectionEventExecuter extends EventExecuter {
   }
 
   excute (event) {
-    this._app.serverManager.socketServer.emit('userJoin', this._user.toObject())
+    let address = event.socket.request.connection._peername
+
+    this._app._logger.info(Lang.format('msg.user.connect', [address.address, address.port]))
   }
 }
 
