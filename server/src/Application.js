@@ -2,6 +2,10 @@ const Lang = require('./lang/Lang')
 
 const LogManager = require('./manager/LogManager')
 const ServerManager = require('./manager/ServerManager')
+const ConsoleManager = require('./manager/ConsoleManager')
+const PluginManager = require('./manager/PluginManager')
+const EventManager = require('./manager/EventManager')
+
 const { LEVEL } = require('./log/Logger')
 
 class Application {
@@ -16,8 +20,19 @@ class Application {
     this._logger.fine(Lang.format('msg.application.created', [this._name]))
   }
 
-  init () {
-    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'))
+  async init () {
+    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'), { portNumber: 3000 })
+    this._consoleManager = new ConsoleManager(this, Lang.format('name.manager.console'))
+
+    this._pluginManager = new PluginManager(this, Lang.format('name.manager.plugin'))
+    this._pluginManager.loadPlugins()
+    try {
+      await this._pluginManager.enablePlugins()
+    } catch (e) {
+      this._logger.warning(e.message)
+    }
+
+    this._eventManager = new EventManager(this, Lang.format('name.manager.event'))
   }
 
   get name () {
@@ -26,8 +41,17 @@ class Application {
   get logManager () {
     return this._logManager
   }
-  get server () {
-
+  get serverManager () {
+    return this._serverManager
+  }
+  get consoleManager () {
+    return this._consoleManager
+  }
+  get pluginManager () {
+    return this._pluginManager
+  }
+  get eventManager () {
+    return this._eventManager
   }
 
   destroyer () {
@@ -40,6 +64,10 @@ class Application {
   }
 
   destroy () {
+    this._serverManager.destroyer()
+    this._consoleManager.destroyer()
+    this._pluginManager.destroyer()
+    this._eventManager.destroyer()
   }
 }
 

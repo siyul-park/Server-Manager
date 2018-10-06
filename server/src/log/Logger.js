@@ -113,6 +113,8 @@ class Logger {
     this._clock = new Clock()
     this._level = LEVEL.OFF
     this._handel = []
+
+    this._prompForm = '\n' + Lang.format('form.promp')
   }
 
   get name () {
@@ -138,7 +140,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.INFO) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.info.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.info.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.info', [this._clock.time, message]))
         }
@@ -153,7 +155,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.WARNING) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.warn.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.warn.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.warn', [this._clock.time, message]))
         }
@@ -168,7 +170,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.CONFIG) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.config.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.config.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.config', [this._clock.time, message]))
         }
@@ -183,7 +185,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.FINE) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.fine.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.fine.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.fine', [this._clock.time, message]))
         }
@@ -198,7 +200,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.FINE) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.finer.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.finer.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.finer', [this._clock.time, message]))
         }
@@ -213,7 +215,7 @@ class Logger {
     this._handel.forEach(element => {
       if ((element.level & LEVEL.FINE) !== 0) {
         if (element.isSupportColor()) {
-          element.add(Lang.format('form.log.finest.color', [this._clock.time, message]))
+          element.add(Lang.format('form.log.finest.color', [this._clock.time, message]) + this._prompForm)
         } else {
           element.add(Lang.format('form.log.finest', [this._clock.time, message]))
         }
@@ -224,7 +226,7 @@ class Logger {
   message (message) {
     this._handel.forEach(element => {
       if (element.isSupportColor()) {
-        element.add(Lang.format('form.log.msg.color', [this._clock.time, '', message]))
+        element.add(Lang.format('form.log.msg.color', [this._clock.time, '', message]) + this._prompForm)
       } else {
         element.add(Lang.format('form.log.msg', [this._clock.time, '', message]))
       }

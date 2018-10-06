@@ -1,68 +1,48 @@
-const Player = require('../entity/Player.js')
-const Location = require('../Location.js')
+const User = require('../entity/User')
 
-const PlayerLoginEvent = require('../event/player/PlayerLoginEvent.js')
-const PlayerJoinEvent = require('../event/player/PlayerJoinEvent.js')
-const Server = require('../Server')
+const UserLoginEvent = require('../event/user/UserLoginEvent')
+const UserJoinEvent = require('../event/user/UserJoinEvent')
+const ServerManager = require('../manager/ServerManager')
 
 const SocketManager = require('./SocketManager.js')
 const Lang = require('../lang/Lang')
 
 class LoginManager extends SocketManager {
   addListener (socket) {
+    let app = this._app
+    let logger = this._logger
+
     socket.on('login', function (data) {
-      let player = new Player(socket.id, new Location(Vokkit.getServer().getWorlds()[0], 0, 0, 0, 0, 0), new THREE.Vector3(0, 0, 0), 20, data.name, socket, data.type)
+      let user = new User(socket.id, data.name, socket)
       let address = socket.request.connection._peername
-      let playerLoginEvent = new PlayerLoginEvent(player, address.address)
-      Vokkit.getServer().getPluginManager().makeEvent(playerLoginEvent)
-      if (playerLoginEvent.isCancelled()) {
+
+      let userLoginEvent = new UserLoginEvent(user, address.address)
+      app.eventManager.extuteEvent(userLoginEvent)
+
+      if (userLoginEvent.isCancelled()) {
         socket.emit('loginResult', {
           succeed: false,
-          reason: playerLoginEvent.getReason()
+          reason: userLoginEvent.reason
         })
         return
       }
-      if (data.name.length === 0) {
-        socket.emit('loginResult', {
-          succeed: false,
-          reason: Lang.format('login.empty_id')
-        })
-        return
+
+      let sendUsers = []
+      let userList = this._app.SocketManager.getUsers()
+      for (let i in userList) {
+        sendUsers.push(userList[i].toObject())
       }
-      if (data.name.length >= 20) {
-        socket.emit('loginResult', {
-          succeed: false,
-          reason: Lang.format('login.long_id')
-        })
-        return
-      }
-      let playerList = Vokkit.getServer().getPlayers()
-      for (let i in playerList) {
-        if (playerList[i].getName() === player.getName()) {
-          socket.emit('loginResult', {
-            succeed: false,
-            reason: Lang.format('login.same_id')
-          })
-          return
-        }
-      }
-      let sendPlayers = []
-      for (let i in playerList) {
-        sendPlayers.push(playerList[i].toObject())
-      }
-      sendPlayers.push(player.toObject())
+
+      sendUsers.push(user.toObject())
       socket.emit('loginResult', {
         succeed: true,
-        players: sendPlayers,
-        worlds: Vokkit.getServer().getWorldManager().getWorldArray()
+        Users: sendUsers
       })
-      Vokkit.getServer().addPlayer(player)
-      Vokkit.getServer().getLogger().info(Lang.format('player.login.message', [player.getName(), address.address, address.port]))
-      let playerJoinEvent = new PlayerJoinEvent(player, Lang.format('player.login.format'))
-      Vokkit.getServer().getPluginManager().makeEvent(playerJoinEvent)
-      Vokkit.getServer().getSocketServer().emit('playerJoin', player.toObject())
-      Vokkit.getServer().getLogger().title(Lang.format('player.list.log'), [Server.version, Vokkit.getServer().getPlayers().length])
-      Vokkit.getServer().getChatManager().broadcast(Lang.formatString(playerJoinEvent.getJoinMessage(), [player.getName()]))
+
+      let userJoinEvent = new UserJoinEvent(user, Lang.format('form.user.login'))
+      app.eventManager.extuteEvent(userJoinEvent)
+      
+      logger.config(Lang.format('form.user.list'), [ServerManager.version, app.serverManager.getUsers().length])
     })
   }
 }

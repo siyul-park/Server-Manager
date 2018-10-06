@@ -1,6 +1,6 @@
 class Event {
-  getEventName () {
-    return this.eventName
+  get eventName () {
+    return this._eventName
   }
 }
 
