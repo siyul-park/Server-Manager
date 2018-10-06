@@ -1,4 +1,4 @@
-class Reaction {
+class Listener {
   constructor (app) {
     this._app = app
   }
@@ -6,4 +6,4 @@ class Reaction {
   addListener (socket) { }
 }
 
-module.exports = Reaction
+module.exports = Listener

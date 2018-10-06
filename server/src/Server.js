@@ -22,10 +22,10 @@ class Server {
   }
 
   async init () {
-    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'), { portNumber: 3000 })
+    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'), { portNumber: 3000, clientPath: 'site' })
     this._consoleManager = new ConsoleManager(this, Lang.format('name.manager.console'))
 
-    this._pluginManager = new PluginManager(this, Lang.format('name.manager.plugin'))
+    this._pluginManager = new PluginManager(this, Lang.format('name.manager.plugin'), { clientPath: 'site' })
     this._pluginManager.loadPlugins()
     try {
       await this._pluginManager.enablePlugins()

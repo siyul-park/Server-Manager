@@ -10,6 +10,7 @@ class ServerManager extends Manager {
   init (args = {}) {
     this._userList = []
     this._portNumber = args.portNumber || 3000
+    this._clientPath = path.resolve('', args.clientPath || 'public')
 
     let startTime = new Date().getTime()
 
@@ -25,7 +26,7 @@ class ServerManager extends Manager {
       .map((iface) => iface.address)
 
     const app = express()
-    app.use(express.static(path.join(path.resolve(''), 'public')))
+    app.use(express.static(this._clientPath))
 
     this._httpServer = http.Server(app)
     this._logger.fine(Lang.format('msg.httpserver.created'))
