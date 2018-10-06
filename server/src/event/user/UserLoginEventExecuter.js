@@ -12,23 +12,23 @@ class UserLoginEventExecuter extends EventExecuter {
 
     if (user.name.length === 0) {
       event.cancelled = true
-      event.reason = Lang.format('err_login_emptyId')
+      event.reason = Lang.format('err.login.emptyId')
     } else if (event.user.name.length >= 20) {
       event.cancelled = true
-      event.reason = Lang.format('err_login_longId')
+      event.reason = Lang.format('err.login.longId')
     }
 
     let userList = this._app.serverManager.getUsers()
     for (let i in userList) {
       if (userList[i].name === user.name) {
         event.cancelled = true
-        event.reason = Lang.format('err_login_sameId')
+        event.reason = Lang.format('err.login.sameId')
       }
     }
 
-    let logger = this._app.logger
+    let logger = this._app._logger
     if (event.cancelled) {
-      logger.warn(event.reason)
+      logger.warning(event.reason)
       return
     }
 

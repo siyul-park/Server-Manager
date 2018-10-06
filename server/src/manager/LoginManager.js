@@ -16,7 +16,7 @@ class LoginManager extends SocketManager {
       let user = new User(socket.id, data.name, socket)
       let address = socket.request.connection._peername
 
-      let userLoginEvent = new UserLoginEvent(user, address.address)
+      let userLoginEvent = new UserLoginEvent(user, address)
       app.eventManager.extuteEvent(userLoginEvent)
 
       if (userLoginEvent.isCancelled()) {
@@ -28,7 +28,7 @@ class LoginManager extends SocketManager {
       }
 
       let sendUsers = []
-      let userList = this._app.SocketManager.getUsers()
+      let userList = app.serverManager.getUsers()
       for (let i in userList) {
         sendUsers.push(userList[i].toObject())
       }
@@ -41,8 +41,8 @@ class LoginManager extends SocketManager {
 
       let userJoinEvent = new UserJoinEvent(user, Lang.format('form.user.login'))
       app.eventManager.extuteEvent(userJoinEvent)
-      
-      logger.config(Lang.format('form.user.list'), [ServerManager.version, app.serverManager.getUsers().length])
+
+      logger.config(Lang.format('form.user.list', [ServerManager.version, app.serverManager.getUsers().length]))
     })
   }
 }

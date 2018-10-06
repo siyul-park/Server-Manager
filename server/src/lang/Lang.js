@@ -43,6 +43,12 @@ let languageData = {
     msg_client_build_fail: '클라이언트 빌드가 실패했습니다.',
     msg_client_build_succeed: '클라이언트 빌드가 성공했습니다.',
 
+    msg_player_login: '%s [%s:%s] 이(가) 로그인 했습니다.',
+
+    err_login_emptyId: '공백 ID를 사용할 수 없습니다.',
+    err_login_longId: 'ID는 %s자를 넘을 수 없습니다.',
+    err_login_sameId: 'ID가 중복됩니다.',
+
     form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ 알림 ] %s\x1b[0m',
     form_log_warn_color: '\x1b[1m\x1b[36m[%s]\x1b[31m [ 경고 ] %s\x1b[0m',
@@ -58,6 +64,9 @@ let languageData = {
     form_log_fine: '[%s] [ 성공 ] %s',
     form_log_finer: '[%s] [매우성공] %s',
     form_log_finest: '[%s] [엄청성공] %s',
+
+    form_user_login: '%s님이 로그인 하셨습니다.',
+    form_user_list: '버전: %s 유저수: %s',
 
     form_promp: '> '
   },
@@ -105,6 +114,12 @@ let languageData = {
     msg_client_build_fail: 'Fail to client build',
     msg_client_build_succeed: 'Succed to client build',
 
+    msg_player_login: '%s [%s:%s] Login',
+
+    err_login_emptyId: 'Cannot use empty ID',
+    err_login_longId: 'ID cannot exceed %s characters.',
+    err_login_sameId: 'same ID exists!',
+
     form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ INFO ] %s\x1b[0m',
     form_log_warn_color: '\x1b[1m\x1b[36m[%s]\x1b[31m [ WARN ] %s\x1b[0m',
@@ -120,6 +135,9 @@ let languageData = {
     form_log_fine: '[%s] [ FINE ] %s',
     form_log_finer: '[%s] [FINER ] %s',
     form_log_finest: '[%s] [FINEST] %s',
+
+    form_user_login: '%s is login',
+    form_user_list: 'Version: %s Total User: %s',
 
     form_promp: '> '
   }

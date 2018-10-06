@@ -1,7 +1,5 @@
 const Lang = require('../lang/Lang')
 const Manager = require('./Manager')
-const SocketConnectManager = require('./SocketConnectManager')
-const LoginManager = require('./LoginManager')
 
 const express = require('express')
 const http = require('http')
@@ -20,21 +18,12 @@ class ServerManager extends Manager {
     this._logger.info(Lang.format('msg.server.opening'))
 
     const app = express()
-    app.use(express.static(path.join(__dirname, 'public')))
+    app.use(express.static(path.join(path.resolve(''), 'public')))
 
     this._httpServer = http.Server(app)
     this._logger.fine(Lang.format('msg.httpserver.created'))
     this._socketServer = io.listen(this._httpServer)
     this._logger.fine(Lang.format('msg.socketioserver.created'))
-
-    this._socketConnectManager = new SocketConnectManager(this._app,
-      Lang.format('name.manager.socketConnect'),
-      { socketServer: this._socketServer })
-
-    this._loginManager = new LoginManager(this._app, Lang.format('name.manager.login'))
-    this._socketConnectManager.addSocketManager(this._loginManager)
-
-    this._socketConnectManager.linkListener()
 
     let logger = this._logger
     let portNumber = this._portNumber
@@ -57,7 +46,7 @@ class ServerManager extends Manager {
 
   addUser (user) {
     for (let i in this._userList) {
-      if (this._userList[i].getId() === user.getId()) {
+      if (this._userList[i].id === user.id) {
         return
       }
     }
@@ -66,7 +55,7 @@ class ServerManager extends Manager {
 
   removeUser (user) {
     for (let i in this._userList) {
-      if (this._userList[i].getId() === user.getId()) {
+      if (this._userList[i].id === user.id) {
         this._userList.splice(i, 1)
         return
       }
@@ -75,7 +64,7 @@ class ServerManager extends Manager {
 
   getUserById (id) {
     for (let i in this._userList) {
-      if (this._userList[i].getId() === id) {
+      if (this._userList[i].id === id) {
         return this._userList[i]
       }
     }
@@ -125,8 +114,6 @@ class ServerManager extends Manager {
   }
 
   destroy () {
-    this._loginManager.destroyer()
-    this._socketConnectManager.destroyer()
   }
 }
 

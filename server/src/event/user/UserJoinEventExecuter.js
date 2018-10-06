@@ -7,7 +7,7 @@ class UserJoinEventExecuter extends EventExecuter {
   }
 
   excute (event) {
-    this._app.serverManager.socketServer.emit('userJoin', this._user.toObject())
+    this._app.serverManager.socketServer.emit('userJoin', event.user.toObject())
   }
 }
 
