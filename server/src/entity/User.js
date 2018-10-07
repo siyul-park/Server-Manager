@@ -1,10 +1,11 @@
 const Entity = require('./Entity.js')
 
 class User extends Entity {
-  constructor (id, name, socket) {
+  constructor (id, name, grade, socket) {
     super(id)
 
     this._name = name
+    this._grade = grade
     this._socket = socket
   }
 
@@ -14,6 +15,10 @@ class User extends Entity {
 
   get socket () {
     return this._socket
+  }
+
+  get grade () {
+    return this._grade
   }
 
   get address () {
@@ -33,22 +38,22 @@ class User extends Entity {
   }
 
   sendMessage (message) {
-    this._socket.emit('chat', {
-      id: this._id,
-      message: message.toString()
-    })
+    // this._socket.emit('chat', {
+    //   id: this._id,
+    //   message: message.toString()
+    // })
   }
 
   toObject () {
     return {
       name: this._name,
-
-      id: this._id
+      id: this._id,
+      grade: this._grade
     }
   }
 
   static fromObject (object, socket) {
-    return new User(object.id, object.name, socket)
+    return new User(object.id, object.name, object.grade, socket)
   }
 }
 

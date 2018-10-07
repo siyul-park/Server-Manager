@@ -8,6 +8,7 @@ let languageData = {
     name_manager_console: '콘솔 관리자',
     name_manager_plugin: '플러그인 관리자',
     name_manager_event: '이벤트 관리자',
+    name_manager_user: '유저 관리자',
 
     name_logger_default: '기본 로거',
 
@@ -46,6 +47,8 @@ let languageData = {
     msg_user_connect: '[%s:%s]이(가) 서버에 접촉했습니다.',
     msg_user_disconnect: '[%s:%s]이(가) 서버에서 나갔습니다.',
 
+    msg_event_added: '%s 이벤트가 추가되었습니다',
+
     err_login_emptyId: '빈 ID를 사용할 수 없습니다.',
     err_login_longId: 'ID는 %s자를 넘을 수 없습니다.',
     err_login_sameId: 'ID가 중복됩니다.',
@@ -80,6 +83,7 @@ let languageData = {
     name_manager_console: 'Console Manager',
     name_manager_plugin: 'Plugin Manager',
     name_manager_event: 'Event Manager',
+    name_manager_user: 'User Manager',
 
     name_logger_default: 'Default Logger',
 
@@ -118,9 +122,11 @@ let languageData = {
     msg_user_connect: '[%s:%s] Connect.',
     msg_user_disconnect: '[%s:%s] Disconnect.',
 
+    msg_event_added: 'Event %s is added.',
+
     err_login_emptyId: 'Cannot use empty ID.',
     err_login_longId: 'ID cannot exceed %s characters.',
-    err_login_sameId: 'same ID exists!',
+    err_login_sameId: 'Same ID exists!',
 
     form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ INFO ] %s\x1b[0m',

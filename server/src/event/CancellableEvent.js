@@ -1,10 +1,15 @@
 const Event = require('./Event.js')
 
 class CancellableEvent extends Event {
-  constructor () {
-    super()
+  constructor (data = {}) {
+    super(data)
+    this._eventName = CancellableEvent.eventName
     this._cancelled = false
     this._reason = ''
+  }
+
+  static get eventName () {
+    return 'CancellableEvent'
   }
 
   set cancelled (cancelled = true) {

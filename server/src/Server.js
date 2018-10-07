@@ -4,6 +4,7 @@ const LogManager = require('./manager/LogManager')
 const ServerManager = require('./manager/ServerManager')
 const ConsoleManager = require('./manager/ConsoleManager')
 const PluginManager = require('./manager/PluginManager')
+const UserManager = require('./manager/UserManager')
 const EventManager = require('./manager/EventManager')
 const SocketConnectManager = require('./manager/SocketConnectManager')
 
@@ -33,6 +34,7 @@ class Server {
       this._logger.warning(e.message)
     }
 
+    this._userManager = new UserManager(this, Lang.format('name.manager.user'))
     this._eventManager = new EventManager(this, Lang.format('name.manager.event'))
     this._socketConnectManager = new SocketConnectManager(this,
       Lang.format('name.manager.socketConnect'),
@@ -44,6 +46,9 @@ class Server {
   }
   get logManager () {
     return this._logManager
+  }
+  get logger () {
+    return this._logger
   }
   get serverManager () {
     return this._serverManager
@@ -59,6 +64,9 @@ class Server {
   }
   get eventManager () {
     return this._eventManager
+  }
+  get userManager () {
+    return this._userManager
   }
 
   destroyer () {
@@ -76,6 +84,7 @@ class Server {
     this._pluginManager.destroyer()
     this._eventManager.destroyer()
     this._socketConnectManager.destroyer()
+    this._userManager.destroyer()
   }
 }
 

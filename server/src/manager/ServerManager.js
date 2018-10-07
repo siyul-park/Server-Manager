@@ -8,7 +8,6 @@ const path = require('path')
 
 class ServerManager extends Manager {
   init (args = {}) {
-    this._userList = []
     this._portNumber = args.portNumber || 3000
     this._clientPath = path.resolve('', args.clientPath || 'public')
 
@@ -40,48 +39,6 @@ class ServerManager extends Manager {
 
       logger.fine(Lang.format('msg.server.opened', [addresses + ':' + portNumber, (endTime - startTime) / 1000]))
     })
-  }
-
-  getUser (name) {
-    for (let i in this._userList) {
-      if (this._userList[i].getName() === name) {
-        return this._userList[i]
-      }
-    }
-
-    return null
-  }
-
-  addUser (user) {
-    for (let i in this._userList) {
-      if (this._userList[i].id === user.id) {
-        return
-      }
-    }
-    this._userList.push(user)
-  }
-
-  removeUser (user) {
-    for (let i in this._userList) {
-      if (this._userList[i].id === user.id) {
-        this._userList.splice(i, 1)
-        return
-      }
-    }
-  }
-
-  getUserById (id) {
-    for (let i in this._userList) {
-      if (this._userList[i].id === id) {
-        return this._userList[i]
-      }
-    }
-
-    return null
-  }
-
-  getUsers () {
-    return this._userList.slice()
   }
 
   get socketServer () {

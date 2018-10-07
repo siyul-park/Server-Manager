@@ -1,9 +1,13 @@
 const SocketEvent = require('./SocketEvent.js')
 
 class SocketDisonnectionEvent extends SocketEvent {
-  constructor (socket) {
-    super(socket)
-    this._eventName = 'SocketDisconnect'
+  constructor (data = {}) {
+    super(data)
+    this._eventName = SocketDisonnectionEvent.eventName
+  }
+
+  static get eventName () {
+    return 'disconnect'
   }
 }
 
