@@ -223,12 +223,12 @@ class Logger {
     })
   }
 
-  message (message) {
+  message (name, message) {
     this._handel.forEach(element => {
       if (element.isSupportColor()) {
-        element.add(Lang.format('form.log.msg.color', [this._clock.time, '', message]) + this._prompForm)
+        element.add(Lang.format('form.log.msg.color', [this._clock.time, name, message]) + this._prompForm)
       } else {
-        element.add(Lang.format('form.log.msg', [this._clock.time, '', message]))
+        element.add(Lang.format('form.log.msg', [this._clock.time, name, message]))
       }
     })
   }

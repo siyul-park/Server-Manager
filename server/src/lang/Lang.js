@@ -53,7 +53,7 @@ let languageData = {
     err_login_longId: 'ID는 %s자를 넘을 수 없습니다.',
     err_login_sameId: 'ID가 중복됩니다.',
 
-    form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s',
+    form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[37m <%s> %s\x1b[0m',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ 알림 ] %s\x1b[0m',
     form_log_warn_color: '\x1b[1m\x1b[36m[%s]\x1b[31m [ 경고 ] %s\x1b[0m',
     form_log_config_color: '\x1b[1m\x1b[36m[%s]\x1b[35m [ 구성 ] %s\x1b[0m',
@@ -61,7 +61,7 @@ let languageData = {
     form_log_finer_color: '\x1b[1m\x1b[36m[%s]\x1b[32m [매우성공] %s\x1b[0m',
     form_log_finest_color: '\x1b[1m\x1b[36m[%s]\x1b[32m [엄청성공] %s\x1b[0m',
 
-    form_log_msg: '[%s] [%s] %s',
+    form_log_msg: '[%s] <%s> %s',
     form_log_info: '[%s] [ 알림 ] %s',
     form_log_warn: '[%s] [ 경고 ] %s',
     form_log_config: '[%s] [ 구성 ] %s',
@@ -69,7 +69,7 @@ let languageData = {
     form_log_finer: '[%s] [매우성공] %s',
     form_log_finest: '[%s] [엄청성공] %s',
 
-    form_user_login: '%s님이 로그인 하셨습니다.',
+    form_user_login: '%s님(id: %s)이 로그인 하셨습니다.',
     form_user_list: '버전: %s 유저수: %s',
 
     form_promp: '> '
@@ -128,7 +128,7 @@ let languageData = {
     err_login_longId: 'ID cannot exceed %s characters.',
     err_login_sameId: 'Same ID exists!',
 
-    form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[0m [%s] %s',
+    form_log_msg_color: '\x1b[1m\x1b[36m[%s]\x1b[37m <%s> %s\x1b[0m',
     form_log_info_color: '\x1b[1m\x1b[36m[%s]\x1b[37m [ INFO ] %s\x1b[0m',
     form_log_warn_color: '\x1b[1m\x1b[36m[%s]\x1b[31m [ WARN ] %s\x1b[0m',
     form_log_config_color: '\x1b[1m\x1b[36m[%s]\x1b[35m [CONFIG] %s\x1b[0m',
@@ -136,7 +136,7 @@ let languageData = {
     form_log_finer_color: '\x1b[1m\x1b[36m[%s]\x1b[32m [FINER ] %s\x1b[0m',
     form_log_finest_color: '\x1b[1m\x1b[36m[%s]\x1b[32m [FINEST] %s\x1b[0m',
 
-    form_log_msg: '[%s] [%s] %s',
+    form_log_msg: '[%s] <%s> %s',
     form_log_info: '[%s] [ INFO ] %s',
     form_log_warn: '[%s] [ WARN ] %s',
     form_log_config: '[%s] [CONFIG] %s',
@@ -144,7 +144,7 @@ let languageData = {
     form_log_finer: '[%s] [FINER ] %s',
     form_log_finest: '[%s] [FINEST] %s',
 
-    form_user_login: '%s is login',
+    form_user_login: '%s(id: %s) is login',
     form_user_list: 'Version: %s Total User: %s',
 
     form_promp: '> '

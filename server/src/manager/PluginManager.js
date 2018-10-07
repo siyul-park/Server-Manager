@@ -78,7 +78,7 @@ class PluginManager extends Manager {
         '  load () {',
         '    this._loadedPlugins = {',
         '    }',
-        '    for (let i in this.loadedPlugins) {',
+        '    for (let i in this._loadedPlugins) {',
         '      let plugin = new (this._loadedPlugins[i])(this._app)',
         '      plugin.onLoad()',
         '      this._plugins.push({',

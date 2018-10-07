@@ -3,6 +3,28 @@ const Manager = require('./Manager')
 class UserManager extends Manager {
   init (args = {}) {
     this._userList = []
+    this._guestNumber = 0
+  }
+
+  evaluateUser (user) {
+    let eventManager = this._app.eventManager
+    let events = eventManager._registeredEvent
+
+    let socket = user.socket
+    let args = { socket: socket }
+
+    events.forEach(element => {
+      if (user.grade >= element.grade && !!element.Event.eventName) {
+        socket.on(element.Event.eventName, function (data) {
+          Object.assign(args, data)
+          eventManager.extuteEvent(new element.Event(args))
+        })
+      }
+    })
+  }
+
+  get guestNumber () {
+    return this._guestNumber
   }
 
   getUser (name) {
@@ -34,7 +56,7 @@ class UserManager extends Manager {
     }
   }
 
-  getUserById (id) {
+  getUserByID (id) {
     for (let i in this._userList) {
       if (this._userList[i].id === id) {
         return this._userList[i]
@@ -44,9 +66,9 @@ class UserManager extends Manager {
     return null
   }
 
-  getUserBySocket (socket) {
+  getUserBySocketID (socketid) {
     for (let i in this._userList) {
-      if (this._userList[i].socket === socket) {
+      if (this._userList[i].socket.id === socketid) {
         return this._userList[i]
       }
     }

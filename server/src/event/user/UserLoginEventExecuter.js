@@ -1,7 +1,7 @@
-const EventExecuter = require('../EventExecuter')
+const EventExecutor = require('../EventExecutor')
 const Lang = require('../../lang/Lang')
 
-class UserLoginEventExecuter extends EventExecuter {
+class UserLoginEventExecutor extends EventExecutor {
   constructor (app) {
     super(app)
     this._eventName = 'UserLoginEvent'
@@ -38,4 +38,4 @@ class UserLoginEventExecuter extends EventExecuter {
   }
 }
 
-module.exports = UserLoginEventExecuter
+module.exports = UserLoginEventExecutor

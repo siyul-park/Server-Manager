@@ -38,10 +38,14 @@ class User extends Entity {
   }
 
   sendMessage (message) {
-    // this._socket.emit('chat', {
-    //   id: this._id,
-    //   message: message.toString()
-    // })
+    this.sendEvent('msg_to_client', {
+      id: this._id,
+      message: message.toString()
+    })
+  }
+
+  sendEvent (name, args = {}) {
+    this._socket.emit(name, args)
   }
 
   toObject () {

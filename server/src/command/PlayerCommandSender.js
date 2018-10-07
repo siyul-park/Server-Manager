@@ -1,30 +1,26 @@
 const CommandSender = require('./CommandSender.js')
 
-class PlayerCommandSender extends CommandSender {
-  constructor (player) {
-    super()
-    this.player = player
+class UserCommandSender extends CommandSender {
+  constructor (server, user) {
+    super(server)
+    this._user = user
   }
 
   sendMessage (message) {
-    this.player.sendMessage(message)
+    this._user.sendMessage(message)
   }
 
   broadcast (message) {
-    Vokkit.getServer().getChatManager().broadcast(message)
+    this._server.getChatManager().broadcast(message)
   }
 
-  getName () {
-    return this.player.getName()
+  get name () {
+    return this._user.name
   }
 
   getPlayer () {
     return this.player
   }
-
-  getServer () {
-    return Vokkit.getServer()
-  }
 }
 
-module.exports = PlayerCommandSender
+module.exports = UserCommandSender

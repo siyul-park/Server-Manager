@@ -23,10 +23,12 @@ class Server {
   }
 
   async init () {
-    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'), { portNumber: 3000, clientPath: 'site' })
+    this._managers = []
+
+    this._serverManager = new ServerManager(this, Lang.format('name.manager.server'), { portNumber: 3000, clientPath: 'public' })
     this._consoleManager = new ConsoleManager(this, Lang.format('name.manager.console'))
 
-    this._pluginManager = new PluginManager(this, Lang.format('name.manager.plugin'), { clientPath: 'site' })
+    this._pluginManager = new PluginManager(this, Lang.format('name.manager.plugin'), { clientPath: 'public' })
     this._pluginManager.loadPlugins()
     try {
       await this._pluginManager.enablePlugins()
@@ -39,6 +41,28 @@ class Server {
     this._socketConnectManager = new SocketConnectManager(this,
       Lang.format('name.manager.socketConnect'),
       { socketServer: this._serverManager.socketServer })
+  }
+
+  addManager (manager) {
+    return this._managers.push(manager)
+  }
+
+  getManager (name) {
+    for (let i in this._managers) {
+      if (this._managers[i].name === name) {
+        return this._managers[i]
+      }
+    }
+  }
+
+  removeManager (name) {
+    for (let i in this._managers) {
+      if (this._managers[i].name === name) {
+        this._managers[i].destroyer()
+        this._managers[i].splice(i, 1)
+        return
+      }
+    }
   }
 
   get name () {
@@ -79,6 +103,9 @@ class Server {
   }
 
   destroy () {
+    for (let i in this._managers) {
+      this._managers[i].destroyer()
+    }
     this._serverManager.destroyer()
     this._consoleManager.destroyer()
     this._pluginManager.destroyer()

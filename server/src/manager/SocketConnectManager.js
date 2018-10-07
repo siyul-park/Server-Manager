@@ -14,7 +14,6 @@ const CommandManager = require('./CommandManager.js')
 class SocketConnectManager extends Manager {
   init (args = {}) {
     this._socketServer = args.socketServer
-    this._listeners = []
 
     // this._loginListenr = new LoginListener(this._app)
     // this._connectListenr = new ConnectListener(this._app)
@@ -27,14 +26,10 @@ class SocketConnectManager extends Manager {
     this.linkEvent()
   }
 
-  addListener (listener) {
-    this._listeners.push(listener)
-  }
-
   linkEvent () {
     let eventManager = this._app.eventManager
-    let events = eventManager._registeredEvent
     let logger = this._logger
+    let userManager = this._app.userManager
 
     this._socketServer.on('connection', function (socket) {
       let args = { socket: socket }
@@ -47,14 +42,7 @@ class SocketConnectManager extends Manager {
         return
       }
 
-      events.forEach(element => {
-        if (connectionEvent.user.grade >= element.grade) {
-          socket.on(element.Event.eventName, function (data) {
-            Object.assign(args, data)
-            eventManager.extuteEvent(new element.Event(args))
-          })
-        }
-      })
+      userManager.evaluateUser(connectionEvent.user)
     })
   }
 }
